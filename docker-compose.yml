@@ -1,0 +1,37 @@
+version: "3.4"
+services:
+  mysql:
+    build: rdb/mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=market
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=BambooTuna
+      - MYSQL_PASSWORD=pass
+  redis:
+    image: redis:3.2.4-alpine
+    restart: always
+    ports:
+      - 6379:6379
+  boot:
+    build: ./apiServer/target/docker/stage
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - REDIS_HOST_SESSION=redis
+      - REDIS_HOST_OAUTH2=redis
+      - MYSQL_HOST=mysql
+      - MYSQL_DATABASE=market
+      - ALLOWED_ORIGIN=http://localhost:9050
+      - SMTP_HOST=smtp.lolipop.jp
+      - SMTP_PORT=465
+      - SMTP_USERNAME=takeo@stko.info
+      - SMTP_PASSWORD=1140725_Takeo
+      - SMTP_FROM=bambootuna@gmail.com
+      - SMTP_FULL_HOST=http://localhost
+    depends_on:
+      - mysql
+      - redis

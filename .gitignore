@@ -1,0 +1,13 @@
+# Project exclude paths
+/apiServer/target/
+/apiServer/target/scala-2.12/classes/
+/domain/target/
+/domain/target/scala-2.12/classes/
+/domain/target/scala-2.12/test-classes/
+/interface/target/
+/interface/target/scala-2.12/classes/
+/interface/target/scala-2.12/test-classes/
+/project/project/target/
+/project/target/
+/target/
+/usecase/target/
